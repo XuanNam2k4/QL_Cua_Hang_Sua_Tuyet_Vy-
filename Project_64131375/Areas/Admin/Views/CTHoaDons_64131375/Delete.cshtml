@@ -1,0 +1,133 @@
+﻿@model Project_64131375.Models.CTHoaDon
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+}
+
+
+
+
+
+
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        display: flex;
+        gap: 20px;
+    }
+
+    .img-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .img-container img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+    .info-container {
+        flex: 2;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+    }
+
+        .info-row dt {
+            font-weight: bold;
+            color: #555;
+            width: 30%;
+        }
+
+        .info-row dd {
+            width: 65%;
+            margin: 0;
+        }
+
+    .btn-group {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        margin: 0 5px;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+</style>
+
+<div class="container">
+   
+   
+
+    <!-- Thông tin  bên phải -->
+    <div class="info-container">
+        <h2 class="text-danger">Bạn có chắc chắn muốn xoá thông tin của chi tiết hoá đơn không?</h2>
+        <hr />
+        <div class="info-row">
+            <span class="info-label">Số lượng bán:</span>
+            <span class="info-content">  @Html.DisplayFor(model => model.SoLuongBan)</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Đơn giá bán:</span>
+            <span class="info-content">   @Html.DisplayFor(model => model.DonGiaBan)</span>
+
+        </div>
+        <div class="info-row">
+            <span class="info-label">Mã khách hàng:</span>
+            <span class="info-content">  @Html.DisplayFor(model => model.HoaDon.MaKH)</span>
+
+        </div>
+        <div class="info-row">
+            <span class="info-label"> Tên sữa:</span>
+            <span class="info-content">   @Html.DisplayFor(model => model.SanPhamSua.TenSua)</span>
+
+        </div>
+
+    </div>
+</div>
+
+@using (Html.BeginForm("Delete", "CTHoaDons_64131375", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+    <input type="hidden" name="maHD" value="@Model.MaHD" />
+    <input type="hidden" name="maSua" value="@Model.MaSua" />
+
+    <div class="form-actions no-color" style="text-align:center">
+        <input type="submit" value="Xoá" class="btn btn-danger" />
+        @Html.ActionLink("Quay lại trang chủ CTHD", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}

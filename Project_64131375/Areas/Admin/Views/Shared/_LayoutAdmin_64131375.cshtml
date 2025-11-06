@@ -1,0 +1,292 @@
+﻿
+
+@try
+{
+    if (Session["HoTen"] != null)
+    {
+        ViewBag.NguoiDung = "" + Session["HoTen"];
+        ViewBag.ChucVu = "" + Session["MaCV"];
+    }
+    else
+    {
+        ViewBag.NguoiDung = "Chưa đăng nhập ";
+    }
+    if (Session["MaCV"] != null)
+    {
+        ViewBag.ChucVu = "" + Session["MaCV"];
+    }
+    else
+    {
+        ViewBag.ChucVu = "";
+    }
+
+
+}
+catch
+{
+
+}
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow">
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/assets/img/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="~/Content/assets/css/font-awesome.min.css">
+
+    <!-- Lineawesome CSS -->
+    <link rel="stylesheet" href="~/Content/assets/css/line-awesome.min.css">
+
+    <!-- Chart CSS -->
+    <link rel="stylesheet" href="~/Content/assets/plugins/morris/morris.css">
+
+    <!-- Bootstrap4 CSS -->
+    <link rel="stylesheet" href="~/Content/assets/css/dataTables.bootstrap4.min.css">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="~/Content/assets/css/select2.min.css">
+
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap-datetimepicker.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+    <!-- print CSS -->
+    <link rel="stylesheet" href="~/Content/assets/print.css">
+    <style>
+        .underload {
+            pointer-events: none;
+        }
+
+            .underload::before,
+            .underload::after {
+                display: none !important;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <!-- Header -->
+        <div class="header">
+
+            <!-- Logo -->
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="~/Content/userAssets/Logo.jpg" style="border-radius:50%" width="40" height="40" alt="">
+                </a>
+            </div>
+            <!-- /Logo -->
+
+            <a id="toggle_btn" href="javascript:void(0);">
+                <span class="bar-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
+
+            <!-- Header Title -->
+            <div class="page-title-box">
+                <h3>Admin Quản Trị Viên</h3>
+            </div>
+            <!-- /Header Title -->
+
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
+
+
+
+
+
+
+            <!-- Header Menu -->
+            <ul class="nav user-menu">
+
+                <!-- Search -->
+                <li class="nav-item">
+                    <div class="top-nav-search">
+                        <a href="javascript:void(0);" class="responsive-search">
+                            <i class="fa fa-search"></i>
+                        </a>
+                       
+                    </div>
+                </li>
+               
+
+
+
+                <li class="nav-item dropdown has-arrow main-drop">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <span class="user-img">
+                            <img src="assets/img/profiles/avatar-21.jpg" alt="">
+                            <span class="status online"></span>
+                        </span>
+                        <span>@ViewBag.NguoiDung</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        @*<a class="dropdown-item" href="profile.html">My Profile</a>
+                        <a class="dropdown-item" href="settings.html">Setting</a>*@
+                        @if (Session["HoTen"] != null && Session["MaCV"] != null)
+                        {
+                            <a class="dropdown-item" href="@Url.Action("Logout", "TaiKhoan_64131375")">Đăng Xuất</a>
+                        }
+                        else
+                        {
+                            <a class="dropdown-item" href="@Url.Action("DangNhap_64131375", "TaiKhoan_64131375")">Đăng Nhập</a>
+                        }
+
+                    </div>
+                </li>
+            </ul>
+            <!-- /Header Menu -->
+            <!-- Mobile Menu -->
+            <div class="dropdown mobile-user-menu">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="settings.html">@Session["MaCV"]</a>
+                    <a class="dropdown-item" href="@Url.Action("Logout", "TaiKhoan_64131375")">Đăng Xuất</a>
+                </div>
+            </div>
+            <!-- /Mobile Menu -->
+
+        </div>
+        <!-- /Header -->
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        @if (ViewBag.ChucVu == "QL")
+                        {
+                        <li>
+                            <a href="@Url.Action("Index", "Home_64131375")"><i class="la la-dashboard"></i> <span> Home</span> </a>
+                        </li>
+
+                        <li class="menu-title">
+                            <span>Nhóm người dùng</span>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="la la-users"></i> <span> Nhân viên</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="@Url.Action("Index", "NhanViens_64131375")">Quản lý thông tin</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="la la-users"></i> <span> Khách hàng</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="@Url.Action("Index", "KhachHangs_64131375")">Quản lý khách hàng</a></li>
+
+                            </ul>
+                        </li>
+
+
+                        <li class="submenu">
+                            <a href="#"><i class="la la-cubes"></i> <span> Sản phẩm</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="@Url.Action("Index", "SanPhamSuas_64131375")">Quản lý sản phẩm sữa</a></li>
+                                <li><a href="@Url.Action("Index", "LoaiSuas_64131375")">Loại Sữa</a></li>
+                                <li><a href="@Url.Action("Index", "NhaCungCaps_64131375")">Nhà cung cấp</a></li>
+                                <li><a href="@Url.Action("Index", "HangSanXuats_64131375")">Hãng sản xuất</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="la la-ticket"></i> <span> Hóa đơn</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="@Url.Action("Index", "HoaDons_64131375")">Quản lý đơn hàng</a></li>
+                                <li><a href="@Url.Action("HoaDonChuaDuyet_64131375", "HoaDons_64131375")">Hóa đơn chưa duyệt</a></li>
+                                <li><a href="@Url.Action("HoaDonDaDuyet_64131375", "HoaDons_64131375")">Hóa đơn đã duyệt</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "CTHoaDons_64131375")"><i class="la la-pie-chart"></i> <span>Chi Tiết Hoá Đơn</span> </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "ThongKe_64131375")"><i class="la la-pie-chart"></i> <span> Thống kê Doanh Thu</span> </a>
+
+                        </li>
+
+
+                        }
+                        else if (ViewBag.ChucVu == "BH")
+                        {
+                                <li class="submenu">
+                            <a href="#"><i class="la la-ticket"></i> <span> Hóa đơn</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="@Url.Action("Index", "HoaDons_64131375")">Quản lý đơn hàng</a></li>
+                                <li><a href="@Url.Action("HoaDonChuaDuyet_64131375", "HoaDons_64131375")">Hóa đơn chưa duyệt</a></li>
+                                <li><a href="@Url.Action("HoaDonDaDuyet_64131375", "HoaDons_64131375")">Hóa đơn đã duyệt</a></li>
+                            </ul>
+                        </li>
+
+
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar -->
+
+
+        <div class="page-wrapper">
+
+            <!-- Page Content -->
+            <div class="content container-fluid">
+
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="~/Content/assets/js/jquery-3.5.1.min.js"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+
+    <!-- Slimscroll JS -->
+    <script src="~/Content/assets/js/jquery.slimscroll.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="~/Content/assets/plugins/morris/morris.min.js"></script>
+    <script src="~/Content/assets/plugins/raphael/raphael.min.js"></script>
+    <script src="~/Content/assets/js/chart.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="~/Content/assets/js/select2.min.js"></script>
+
+    <!-- Datetimepicker JS -->
+    <script src="~/Content/assets/js/moment.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!-- Datatable JS -->
+    <script src="~/Content/assets/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/assets/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="~/Content/assets/js/app.js"></script>
+    @RenderSection("Scripts", required: false)
+
+
+
+</body>
+</html>

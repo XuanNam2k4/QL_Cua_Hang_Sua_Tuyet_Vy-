@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Project_64131375.Models.CTHoaDon>
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+    int i = 0;
+}
+
+
+
+
+
+<!-- Page Header -->
+@using (Html.BeginForm("Index", "CTHoaDons_64131375", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Chi tiết hóa đơn </h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Hóa đơn</a></li>
+                    <li class="breadcrumb-item active">Chi tiết hóa đơn</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="@Url.Action("Create", "CTHoaDons_64131375")" class="btn add-btn"><i class="fa fa-plus"></i> Thêm chi tiết hóa đơn</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row filter-row justify-content-center ">
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="maHD" value="@ViewBag.MaHD">
+                <label class="focus-label">Mã hóa đơn</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="TenSua" value="@ViewBag.TenSua">
+                <label class="focus-label">Tên sữa</label>
+            </div>
+        </div>
+
+
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="number" class="form-control floating" name="donGia" value="@ViewBag.DonGia">
+                <label class="focus-label">Đơn giá</label>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-success btn-block" />
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <a href="@Url.Action("Index", "CTHoaDons_64131375/Index")" class="btn btn-info btn-block"> Nhập mới </a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã hóa đơn</th>
+                            <th>Tên sữa</th>
+                            <th>Số lượng bán</th>
+                            <th>Đơn giá bán</th>
+                            <th class="text-right no-sort underload">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @{ i++;}
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaHD)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SanPhamSua.TenSua)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoLuongBan)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DonGiaBan)
+                                </td>
+
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="@Url.Action("Details", "CTHoaDons_64131375", new { maHD = item.MaHD, maSua = item.MaSua })"><i class="fa fa-eye m-r-5"></i> Xem chi tiết</a>
+                                            <a class="dropdown-item" href="@Url.Action("Delete", "CTHoaDons_64131375", new { maHD = item.MaHD, maSua = item.MaSua })">
+                                                <i class="fa fa-trash-o m-r-5"></i> Xoá
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

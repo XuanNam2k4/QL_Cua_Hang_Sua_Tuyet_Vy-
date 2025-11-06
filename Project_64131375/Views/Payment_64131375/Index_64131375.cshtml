@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index_64131375";
+    Layout = "~/Views/Shared/_LayoutUser_64131375.cshtml";
+}
+
+
+
+<style>
+    .centered-image {
+        width: 170px; /* Điều chỉnh chiều rộng */
+        height: 170px; /* Điều chỉnh chiều cao */
+        display: block; /* Chuyển hình ảnh thành phần khối */
+        margin-left: auto; /* Canh trái tự động */
+        margin-right: auto; /* Canh phải tự động */
+    }
+
+
+    .eme a {
+        display: inline-block; /* Hiển thị dưới dạng khối nội dòng */
+        padding: 10px 20px; /* Tăng kích thước nút */
+        font-size: 16px; /* Tăng cỡ chữ */
+        color: #fff; /* Chữ trắng */
+        /*background-color: #2fc5d4;*/ /* Màu nền xanh nước biển */
+
+        background-color: #dc3545; /* Màu đỏ (Bootstrap Danger) */
+        text-decoration: none; /* Xóa gạch chân */
+        border-radius: 5px; /* Bo góc cho nút */
+        border: none; /* Xóa viền */
+        transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+    }
+
+        .eme a:hover {
+            background-color: #13a2b8; /* Đổi màu nền khi hover */
+            color: #ffffff; /* Giữ màu chữ trắng khi hover */
+            text-decoration: none; /* Xóa gạch chân khi hover */
+</style>
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col col-12 d-flex align-content-center justify-content-center">
+            <img class="centered-image" src="~/Content/userAssets/img/payment1.png" />
+
+        </div>
+        <h2 style=" width: 100%; text-align: center;">Thanh toán thành công</h2>
+        @*<div class="col col-12 eme">
+            <a class="text-dark" href="@Url.Action("Index_64131375", "Home_64131375")"><i class="fas fa-long-arrow-alt-left"></i> Quay lại</a>
+        </div>*@
+
+
+        <!-- Nút quay lại -->
+        <div class="col col-12 eme d-flex justify-content-center mt-3">
+            <a href="@Url.Action("Index_64131375", "Home_64131375")">
+                <i class="fas fa-long-arrow-alt-left"></i> Quay lại
+            </a>
+        </div>
+    </div>
+</div>
+

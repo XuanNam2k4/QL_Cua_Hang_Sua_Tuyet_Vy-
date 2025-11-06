@@ -1,0 +1,56 @@
+﻿@model Project_64131375.Models.LoaiSua
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+}
+
+
+<div class="page-header ">
+   
+        <div class="col">
+            <h3 class="page-title" style="color:red; text-align:center">Bạn có thực sự muốn xóa các loại sữa không?</h3>
+        </div>
+
+    
+    <div>
+        <div class="card mb-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-view">
+                            <div class="profile-img-wrap" style="top: -18px;height:95px">
+                                <div class="profile-img">
+                                    <a href="">
+                                        <img src='~/Content/assets/img/LoaiSua/@Model.AnhLoaiSua' alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="profile-basic">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="profile-info-left">
+                                            <div class="staff-id"> Mã loại sữa: @Model.MaLoaiSua</div>
+                                            <div class="staff-id"> &nbsp;</div>
+                                            <div class="staff-id"> Tên loại sữa: @Model.TenLoaiSua</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="submit-section" style="text-align:center">
+                <input type="submit" value="Xoá" class="btn btn-success submit-btn" />&nbsp;
+                @Html.ActionLink("Quay Lại Trang Chủ Loại Sữa", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+            </div>
+        }
+    </div>
+</div>

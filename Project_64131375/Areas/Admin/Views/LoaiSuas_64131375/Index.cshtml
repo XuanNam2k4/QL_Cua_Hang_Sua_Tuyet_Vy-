@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Project_64131375.Models.LoaiSua>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+    int i = 0;
+}
+
+
+
+@using (Html.BeginForm("Index", "LoaiSuas_64131375", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Các Loại Sữa</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active">Các Loại Sữa</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="@Url.Action("Create", "LoaiSuas_64131375")" class="btn add-btn"><i class="fa fa-plus"></i> Thêm loại sữa</a>
+            </div>
+        </div>
+    </div>
+    <div class="row filter-row justify-content-center ">
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="MaLoaiSua" value="@ViewBag.MaLoaiSua">
+                <label class="focus-label">Mã loại sữa</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="TenLoaiSua" value="@ViewBag.TenLoaiSua">
+                <label class="focus-label">Tên loại sữa</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-success btn-block" />
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <a href="@Url.Action("Index", "LoaiSuas_64131375/Index")" class="btn btn-info btn-block"> Nhập mới </a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã loại sữa</th>
+                            <th>Tên loại sữa</th>
+                            <th class="underload text-center">Ảnh loại sữa</th>
+                            <th class="text-right no-sort underload">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @{ i++;}
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaLoaiSua)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenLoaiSua)
+                                </td>
+                                <td class="text-center">
+                                    <img style="border-radius:14%; width: 18%; height: auto" src="~/Content/assets/img/LoaiSua/@item.AnhLoaiSua" class="border border-light" alt="your image">
+                                </td>
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.MaLoaiSua})"><i class="fa fa-pencil m-r-5"></i>Chỉnh Sửa Loại Sữa</a>
+                                            <a class="dropdown-item" href="@Url.Action("Details", new { id = item.MaLoaiSua })"><i class="fa fa-eye m-r-5"></i> Xem Chi Tiết Loại Sữa</a>
+                                            <a class="dropdown-item" href="@Url.Action("Delete", new { id = item.MaLoaiSua })"><i class="fa fa-trash-o m-r-5"></i> Xoá Các Loại Sữa</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

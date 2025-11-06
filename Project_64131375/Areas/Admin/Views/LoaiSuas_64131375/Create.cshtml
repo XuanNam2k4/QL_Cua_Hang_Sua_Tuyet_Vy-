@@ -1,0 +1,52 @@
+﻿@model Project_64131375.Models.LoaiSua
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm("Create", "LoaiSuas_64131375", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-content">
+        <div class="modal-header justify-content-center">
+            <h4 class="modal-title"><b>THÊM LOẠI SỮA</b></h4>
+        </div>
+        <div class="modal-body">
+            <div class="form">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MaLoaiSua, "Mã loại sữa", htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.MaLoaiSua, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MaLoaiSua, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TenLoaiSua, "Tên loại sữa", htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.TenLoaiSua, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TenLoaiSua)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AnhLoaiSua, "Ảnh loại sữa", htmlAttributes: new { @class = "" })
+                            <input type="file" class="form-control" name="AnhLoaiSua" accept="image/*" required>
+                            @Html.ValidationMessageFor(model => model.AnhLoaiSua, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-section">
+                    @Html.ActionLink("Quay lại trang chủ loại sữa", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+                    <input type="submit" value="Thêm" class="btn btn-success submit-btn" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

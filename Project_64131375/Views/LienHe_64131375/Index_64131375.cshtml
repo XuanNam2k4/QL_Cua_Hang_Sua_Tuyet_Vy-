@@ -1,0 +1,182 @@
+﻿@model Project_64131375.Models.MailInfo_64131375
+@{
+    ViewBag.Title = "Index_64131375";
+    Layout = "~/Views/Shared/_LayoutUser_64131375.cshtml";
+}
+
+<style>
+
+    .form-horizontal {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+    }
+
+    /* Canh chữ nhãn label */
+    .col-form-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Canh chỉnh input */
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 8px 10px;
+    }
+
+    /* Hiển thị lỗi */
+    .text-danger {
+        font-size: 12px;
+        color: #e74c3c;
+    }
+
+    .text-black {
+        color: black; /* Màu chữ đen */
+        text-decoration: none; /* Không gạch chân liên kết */
+    }
+
+        .text-black:hover {
+            color: #333; /* Màu xám đậm khi rê chuột vào */
+        }
+
+   
+
+</style>
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="@Url.Action("Index_64131375", "Home_64131375")">Trang chủ</a>
+                <span class="breadcrumb-item active">Liên hệ</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Contact Start -->
+<div class="container-fluid">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">LIÊN HỆ</span></h2>
+    <div class="row px-xl-5">
+        <div class="col-lg-7 mb-5">
+            <div class="contact-form bg-light p-30">
+                <div id="success"></div>
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <!-- Gửi từ email -->
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.From, "Nhập email của bạn:", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.From, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Mật khẩu -->
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Password, "Mật khẩu:", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Gửi đến email -->
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.To, "Gửi email cửa hàng:", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Hoten, "Họ tên:", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Tiêu đề -->
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Subject, "Tiêu đề", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Nội dung -->
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Body, "Nội dung", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.TextAreaFor(model => model.Body, new { @class = "form-control", rows = 5 })
+                        @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Nút gửi -->
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" style="margin-left:100px">
+                        <button type="submit" class="btn btn-primary">Gửi</button>
+                    </div>
+                </div>
+            </div>
+                }
+
+
+
+
+            </div>
+        </div>
+        <div class="col-lg-5 mb-5">
+            <div class="bg-light p-30 mb-30">
+                <iframe style="width: 100%; height: 250px;"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                        frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+            <div class="bg-light p-30 mb-3">
+                <p class="mb-2">
+                    <i class="fa fa-map-marker-alt text-info mr-3"></i>
+                    <span class="text-black">1305 đường 23/10 Vĩnh Trung, TP Nha Trang, Khánh Hòa</span>
+                </p>
+                <p class="mb-2">
+                    <i class="fa fa-envelope text-info mr-3"></i>
+                    <span class="text-black">tuyetvy1984@gmail.com</span>
+                </p>
+                <p class="mb-2">
+                    <i class="fa fa-phone-alt text-info mr-3"></i>
+                    <span class="text-black">+84 947 138 175</span>
+                </p>
+                <p class="mb-2">
+                    <i class="fab fa-facebook-f text-info mr-3"></i>
+                    <a href="https://www.facebook.com/cuahangtuyetvy" target="_blank" class="text-black">
+                        Thông tin Facebook của cửa hàng Tuyết Vy
+                    </a>
+                </p>
+                <p class="mb-2">
+                    <i class="fab fa-facebook-f text-info mr-3"></i>
+                    <a href="https://www.facebook.com/profile.php?id=100081770547620" target="_blank" class="text-black">
+                        Thông tin Facebook của tôi - (Huỳnh Xuân Nam)
+                    </a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Contact End -->

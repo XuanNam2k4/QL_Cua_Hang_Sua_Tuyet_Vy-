@@ -1,0 +1,137 @@
+﻿@model Project_64131375.Models.SanPhamSua
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+}
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(function ()
+                    {
+                        var fileupload = $("#Avatar");
+                        var image = $("#FileUpload");
+                        image.click(function ()
+                        {
+                            fileupload.click();
+                        });
+                        fileupload.change(function ()
+                        {
+                            var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
+                            document.getElementById("AnhSua").value=fileName;
+                        });
+                    });</script>
+
+<style>
+    .btn-dep input[type="submit"] {
+        background-color: #4CAF50; /* Màu xanh lá cây */
+        color: white; /* Chữ màu trắng */
+        padding: 10px 20px; /* Đệm bên trong */
+        font-size: 16px; /* Cỡ chữ */
+        border: none; /* Không có viền */
+        border-radius: 5px; /* Góc bo tròn */
+        cursor: pointer; /* Biểu tượng chuột khi rê vào */
+        transition: all 0.3s; /* Hiệu ứng mượt */
+    }
+
+        .btn-dep input[type="submit"]:hover {
+            background-color: #45a049; /* Màu xanh đậm hơn khi rê chuột */
+        }
+
+</style>
+
+@using (Html.BeginForm("Edit", "SanPhamSuas_64131375", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Chỉnh Sữa Sản Phẩm Sữa</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaSua)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenSua,"Tên sữa" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenSua, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenSua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MoTa,"Mô tả sữa" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnhSua,"Hình ảnh sữa" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AnhSua, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AnhSua, "", new { @class = "text-danger" })
+                <input type="file" class="form-control" name="AnhSua" id="Avatar" accept="image/*">
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoLuong,"Số lượng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HanSuDung,"Hạn sử dụng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HanSuDung, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HanSuDung, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DonGia,"Đơn giá" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DonGia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DonGia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaLoaiSua, "Loại sữa", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaLoaiSua", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaLoaiSua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaNCC, "Tên nhà cung cấp", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaNCC", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaHSX, "Tên Hãng sản xuất ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaHSX", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaHSX, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="text-align:center">
+            <div class="col-md-offset-2 col-md-10 btn-dep">
+                <input type="submit" value="Lưu" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div style="text-align:center; margin-right:200px">
+    @Html.ActionLink("Quay Lại Trang Chủ Sản Phẩm Sữa", "Index")
+</div>

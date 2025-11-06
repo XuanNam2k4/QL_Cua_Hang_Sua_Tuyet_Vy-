@@ -1,0 +1,99 @@
+﻿@model Project_64131375.Models.KhachHang
+
+@{
+    ViewBag.Title = "ThongTinKH_64131375";
+    Layout = "~/Views/Shared/_LayoutUser_64131375.cshtml";
+}
+
+
+<script>
+    function confirmUpdate() {
+        return confirm("Bạn có muốn cập nhật thông tin của bạn không?");
+    }
+</script>
+
+
+
+
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="@Url.Action("Index_64131375", "Home_64131375")">Trang chủ</a>
+                <span class="breadcrumb-item active">Quản lý thông tin</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Checkout Start -->
+<div class="container-fluid">
+    <div class="row px-xl-12">
+        <div class="col-lg-12">
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Quản lý thông tin</span></h5>
+            <div class="bg-light p-30 mb-5">
+                @using (Html.BeginForm("ThongTinKH_64131375", "Home_64131375", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        @Html.HiddenFor(model => model.MaKH)
+                        <div class="col-md-6 form-group">
+                            <label>Họ tên <span class="text-danger"> *</span></label>
+                            @Html.EditorFor(model => model.HoTenKH, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.HoTenKH, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Số điện thoại  <span class="text-danger"> *</span></label>
+                            @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Email  <span class="text-danger"> *</span></label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Địa chỉ nhận hàng  <span class="text-danger"> *</span></label>
+                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                        </div>
+
+
+
+                        @*<div class="col-md-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input value="Cập nhật" class="btn btn-primary py-2 w-25" type="submit">
+                                </div>
+                            </div>*@
+
+
+                        <div class="col-md-12">
+                            <div class="custom-control custom-checkbox">
+                                <input value="Cập nhật" class="btn btn-primary py-2 w-25" type="submit" onclick="return confirmUpdate()">
+                            </div>
+                        </div>
+
+                    </div>
+
+                }
+            </div>
+            <div class="collapse mb-5" id="shipping-address">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Shipping Address</span></h5>
+                <div class="bg-light p-30">
+                    <div class="row">
+
+                        <div class="col-md-6 form-group">
+                            <label>ZIP Code</label>
+                            <input class="form-control" type="text" placeholder="123">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Checkout End -->

@@ -1,0 +1,73 @@
+﻿@model Project_64131375.Models.NhaCungCap
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+}
+
+
+
+
+<div class="page-header ">
+  
+        <div class="col">
+            <h3 class="page-title" style="color:red; text-align:center">Bạn có thực sự muốn xóa thông tin nhà cung cấp?</h3>
+        </div>
+
+   
+    <div>
+
+        <div class="card mb-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-view">
+                           
+                            <div class="profile-basic">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="profile-info-left">
+                                            <h3 class="user-name m-t-0">@Model.TenNCC</h3>
+                                            <div class="staff-id">&nbsp;</div>
+                                            <div class="staff-id"> Mã nhà cung cấp: @Model.MaNCC</div>
+
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <ul class="personal-info">
+                                            <li>
+                                                <span class="title">Số điện thoại:</span>
+                                                <span class="text"><a href="">@Model.SDT</a></span>
+                                            </li>
+                                            <li>
+                                                <span class="title">Email:</span>
+                                                <span class="text"><a href="">@Model.Email</a></span>
+                                            </li>
+                                            <li>
+                                                <span class="title">Địa chỉ:</span>
+                                                <span class="text">@Model.DiaChi</span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="submit-section" style="text-align:center">
+                <input type="submit" value="Xoá" class="btn btn-success submit-btn" />&nbsp;
+                @Html.ActionLink("Quay lại trang chủ nhà cung cấp", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+            </div>
+        }
+    </div>
+</div>

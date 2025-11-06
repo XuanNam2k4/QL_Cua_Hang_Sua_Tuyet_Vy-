@@ -1,0 +1,60 @@
+﻿@model Project_64131375.Models.HangSanXuat
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+}
+
+
+
+
+<div class="page-header ">
+   
+        <div class="col ">
+            <h3 class="page-title" style="text-align:center">Chỉnh sửa thông tin hãng sản xuất</h3>
+        </div>
+
+   
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MaHSX)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenHSX,"Tên hãng sản xuất", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenHSX, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenHSX, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiaChi,"Địa chỉ" ,htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SDT,"Số điện thoại" ,htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <input type="submit" value="Lưu" class="btn btn-success submit-btn" />&nbsp;
+                @Html.ActionLink("Quay lại trang chủ HSX", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+            </div>
+        </div>
+    }
+
+</div>

@@ -1,0 +1,63 @@
+﻿@model Project_64131375.Models.NhaCungCap
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+}
+
+
+
+
+<div class="page-header ">
+   
+        <div class="col">
+            <h3 class="page-title" style="text-align:center">Chi tiết thông tin Nhà cung cấp</h3>
+        </div>
+
+
+    <div class="card mb-0">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="profile-view">
+                      
+                        <div class="profile-basic">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="profile-info-left">
+                                        <h3 class="user-name m-t-0">@Model.TenNCC</h3>
+                                        <div class="staff-id">&nbsp;</div>
+                                        <div class="staff-id"> Mã nhà cung cấp: @Model.MaNCC</div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <ul class="personal-info">
+                                        <li>
+                                            <span class="title">Số điện thoại:</span>
+                                            <span class="text"><a href="">@Model.SDT</a></span>
+                                        </li>
+                                        <li>
+                                            <span class="title">Email:</span>
+                                            <span class="text"><a href="">@Model.Email</a></span>
+                                        </li>
+                                        <li>
+                                            <span class="title">Địa chỉ:</span>
+                                            <span class="text">@Model.DiaChi</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="submit-section" style="text-align:center">
+        @Html.ActionLink("Chỉnh sửa thông tin NCC", "Edit", new { id = Model.MaNCC }, new { @class = "btn btn-success submit-btn" }) &nbsp;
+        @Html.ActionLink("Quay lại trang chủ NCC", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+    </div>
+</div>

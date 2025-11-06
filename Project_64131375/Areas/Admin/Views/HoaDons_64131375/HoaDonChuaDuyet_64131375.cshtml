@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Project_64131375.Models.HoaDon>
+
+@{
+    ViewBag.Title = "HoaDonChuaDuyet_64131375";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+    int i = 0;
+}
+
+
+
+<script type="text/javascript" src="~/Content/userAssets/js/paginate.js"></script>
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h3 class="page-title">Hóa đơn chưa duyệt</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","HoaDons_64131375")">Hóa đơn</a></li>
+                <li class="breadcrumb-item active">Hóa đơn chưa duyệt</li>
+            </ul>
+        </div>
+    </div>
+</div>
+@*<div class="row filter-row justify-content-center ">
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group ">
+                <input class="form-control" type="search" id="searchBox" placeholder="Tìm kiếm bất kỳ...">
+            </div>
+        </div>
+
+    </div>*@
+
+
+
+<form method="post" action="@Url.Action("HoaDonChuaDuyet_64131375","HoaDons_64131375")" class="row filter-row justify-content-center">
+    <!-- Ô nhập Mã Hoá Đơn -->
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+        <div class="form-group form-focus">
+            <input type="text" class="form-control floating" name="maHD" value="@ViewBag.mahd" placeholder="Nhập mã hoá đơn">
+            <label class="focus-label">Mã Hoá Đơn</label>
+        </div>
+    </div>
+
+    <!-- Ô nhập Tên khách hàng -->
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+        <div class="form-group form-focus">
+            <input type="text" class="form-control floating" name="tenKH" value="@ViewBag.tenKH" placeholder="Nhập tên KH">
+            <label class="focus-label">Tên Khách Hàng</label>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+        <div class="form-group form-focus">
+            <input type="text" class="form-control floating" name="tenNV" value="@ViewBag.tenNV" placeholder="Nhập tên NV">
+            <label class="focus-label">Tên Nhân Viên</label>
+        </div>
+    </div>
+
+
+
+    <!-- Nút tìm kiếm -->
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+        <button type="submit" class="btn btn-success btn-block">Tìm kiếm</button>
+    </div>
+
+    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+        <a href="@Url.Action("HoaDonChuaDuyet_64131375", "HoaDons_64131375/HoaDonChuaDuyet_64131375")" class="btn btn-info btn-block"> Nhập mới </a>
+    </div>
+
+</form>
+
+<!-- /Search Filter -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive: nowrap">
+            <table class="table table-striped custom-table datatable mb-0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th class="underload">Mã HD</th>
+                        <th>Ngày đặt</th>
+                        <th>Ngày giao</th>
+                        <th>Trạng thái duyệt</th>
+                        <th>Trạng thái giao</th>
+                        <th>Khách hàng</th>
+                        <th>Nhân viên</th>
+                        <th>Tổng tiền</th>
+                        <th class="underload">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody class="myTable">
+                    @foreach (var item in Model)
+                    {
+                        {
+                            if (item.TinhTrangDuyet == false)
+                            {
+                                <tr>
+                                    <td>
+                                        @{ i++;}
+                                        @i
+                                    </td>
+                                    <td><a href="invoice-view.html">@Html.DisplayFor(modelItem => item.MaHD)</a></td>
+                                    <td> @Convert.ToDateTime(item.NgayDH).ToString("dd/MM/yyyy")</td>
+                                    @if (item.NgayGH == null)
+                                    {
+                                        <td></td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Convert.ToDateTime(item.NgayGH).ToString("dd/MM/yyyy")
+                                        </td>
+                                    }
+                                    <td><span class="badge bg-inverse-warning">Chưa duyệt</span></td>
+                                    @{if (item.TinhTrangDonHang == true)
+                                        {
+                                            <td><span class="badge bg-inverse-success">Đã giao</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="badge bg-inverse-warning">Thất bại</span></td>
+                                        }
+                                    }
+                                    <td>@Html.DisplayFor(modelItem => item.KhachHang.HoTenKH)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NhanVien.HoTenNV)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TongTien)</td>
+                                    <td class="text-right">
+                                        <a href="@Url.Action("Edit", new { id = item.MaHD })" style="font-size: 16px; min-width: 106px;padding: 6px 6px;" class="btn btn-success submit-btn">Duyệt</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    let options = {
+        numberPerPage: 100,
+        goBar: false,
+        pageCounter: false,
+    };
+
+    let filterOptions = {
+        el: '#searchBox'
+    };
+
+    paginate.init('.myTable', options, filterOptions);</script>
+
+

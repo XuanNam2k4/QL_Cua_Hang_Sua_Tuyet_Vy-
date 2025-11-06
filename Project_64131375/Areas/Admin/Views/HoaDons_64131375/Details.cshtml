@@ -1,0 +1,105 @@
+﻿@model Project_64131375.Models.HoaDon
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+    string ttDuyet = "", ttdh = "";
+}
+
+
+
+
+
+<div class="page-header ">
+    <div class="row align-items-center justify-content-center >
+        <div class="col ">
+            <h3 class="page-title">Chi tiết thông tin hóa đơn</h3>
+        </div>
+    </div>
+
+
+
+    <div>
+
+        <div class="card mb-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-view">
+                            <!--<div class="profile-img-wrap">
+                            <div class="profile-img">-->
+                            @*<a href="">
+                                    <img src="assets/img/profiles/avatar-19.jpg" alt="">
+                                </a>*@
+                            <!--</div>
+                            </div>-->
+                            <div class="profile-basic">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="profile-info-left">
+
+
+                                            <div class="staff-id"> @Html.DisplayNameFor(model => model.MaHD): @Model.MaHD</div>
+                                            <div class="staff-id"> &nbsp;</div>
+                                            <div class="staff-id"> @Html.DisplayNameFor(model => model.KhachHang.HoTenKH): @Model.KhachHang.HoTenKH</div>
+                                            <div class="staff-id"> &nbsp;</div>
+                                            <div class="staff-id"> @Html.DisplayNameFor(model => model.NhanVien.HoTenNV): @Model.NhanVien.HoTenNV</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <ul class="personal-info">
+                                            <li>
+                                                <span class="title">@Html.DisplayNameFor(model => model.NgayDH)</span>
+                                                <span class="text"><a href="">@Model.NgayDH</a></span>
+                                            </li>
+                                            <li>
+                                                <span class="title">@Html.DisplayNameFor(model => model.TinhTrangDuyet):</span>
+                                                @{ if (Model.TinhTrangDuyet == true)
+                                                    {
+                                                        ttDuyet = "Đã duyệt";
+
+                                                    }
+                                                    else
+                                                    {
+                                                        ttDuyet = "Chưa duyệt";
+
+                                                    } }
+                                                <span class="text"><a href="">@ttDuyet</a></span>
+
+                                            </li>
+                                            <li>
+                                                <span class="title">Tình trạng đơn:</span>
+                                                @{ if (Model.TinhTrangDonHang == true)
+                                                    {
+                                                        ttdh = "Đã giao";
+
+                                                    }
+                                                    else
+                                                    {
+                                                        ttdh = "Thất bại";
+
+                                                    } }
+                                                <span class="text">@ttdh</span>
+                                            </li>
+
+                                            <li>
+                                                <span class="title">@Html.DisplayNameFor(model => model.TongTien):</span>
+                                                <span class="text">@Model.TongTien</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="submit-section">
+
+        @Html.ActionLink("Quay lại trang chủ Hoá Đơn", "Index", null, new { @class = "btn btn-secondary submit-btn m-r-10" })
+    </div>
+
+
+</div>

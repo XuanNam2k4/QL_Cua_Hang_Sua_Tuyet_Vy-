@@ -1,0 +1,128 @@
+﻿@model Project_64131375.Models.NhanVien
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+}
+
+<style>
+
+    .senbai input[type="submit"] {
+        padding: 10px 20px; /* Tăng kích thước nút */
+        font-size: 16px; /* Cỡ chữ */
+        color: #fff; /* Màu chữ trắng */
+        background-color: #28a745; /* Màu xanh lá cây */
+        border: none; /* Xóa viền */
+        border-radius: 5px; /* Bo góc cho nút */
+        cursor: pointer; /* Thêm con trỏ chuột dạng tay */
+        transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng chuyển màu và phóng to */
+    }
+
+        .senbai input[type="submit"]:hover {
+            background-color: #218838; /* Màu xanh lá đậm hơn khi hover */
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
+        }
+
+        .senbai input[type="submit"]:active {
+            background-color: #1e7e34; /* Màu xanh lá tối hơn khi nhấn */
+        }
+
+</style>
+
+@using (Html.BeginForm("Create", "NhanViens_64131375", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Thêm mới nhân viên</h4>
+        <hr />
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group1 d-flex">
+            @Html.LabelFor(model => model.MaNV, "Mã nhân viên", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                <input type="text" value="@ViewBag.MaNV" disabled readonly class="form-control" />
+                @*@Html.EditorFor(model => model.MaNV,"@ViewBag.MaNV", new { htmlAttributes = new { @class = "form-control",disabled = "disabled", @readonly = "readonly" } })*@
+                @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HoTenNV,"Họ tên nhân viên", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HoTenNV, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HoTenNV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnhNV,"Ảnh nhân viên" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" style="height:30px;" name="AnhNV" accept="image/*" required />
+                @Html.ValidationMessageFor(model => model.AnhNV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SDT,"Số điện thoại" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email,"Email", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DiaChi,"Địa chỉ" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenDN,"Tên đăng nhập" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenDN, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MatKhau,"Mật khẩu" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaCV, "Chức vụ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaCV", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaCV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 senbai">
+                <input type="submit" value="Thêm mới" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Quay Lại Trang Chủ Nhân Viên", "Index")
+</div>
+
+

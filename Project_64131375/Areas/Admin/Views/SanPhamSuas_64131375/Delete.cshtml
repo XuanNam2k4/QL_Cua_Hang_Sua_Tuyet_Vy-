@@ -1,0 +1,152 @@
+﻿@model Project_64131375.Models.SanPhamSua
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+}
+
+
+
+
+
+
+
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        display: flex;
+        gap: 20px;
+    }
+
+    .img-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .img-container img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+    .info-container {
+        flex: 2;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+    }
+
+        .info-row dt {
+            font-weight: bold;
+            color: #555;
+            width: 30%;
+        }
+
+        .info-row dd {
+            width: 65%;
+            margin: 0;
+        }
+
+    .btn-group {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        margin: 0 5px;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+</style>
+
+<div class="container">
+    <!-- Ảnh sinh viên bên trái -->
+    <div class="img-container">
+        <img src="~/Content/assets/img/SanPhamSua/@Html.DisplayFor(model => model.AnhSua)" />
+    </div>
+
+    <!-- Thông tin sinh viên bên phải -->
+    <div class="info-container">
+        <h2 class="text-danger">Bạn có thực sự muốn xoá sản phẩm sữa?</h2>
+        <hr />
+        <div class="info-row">
+            <span class="info-label">Tên sữa:</span>
+            <span class="info-content">   @Html.DisplayFor(model => model.TenSua)</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Thông tin mô tả sữa:</span>
+            <span class="info-content" style="margin-left:70px">  @Html.DisplayFor(model => model.MoTa)</span>
+
+        </div>
+        <div class="info-row">
+            <span class="info-label">Số lượng:</span>
+            <span class="info-content">   @Html.DisplayFor(model => model.SoLuong)</span>
+
+        </div>
+        <div class="info-row">
+            <span class="info-label">Hạn sử dụng:</span>
+            <span class="info-content"> @Html.DisplayFor(model => model.HanSuDung)</span>
+
+        </div>
+        <div class="info-row">
+            <span class="info-label">Đơn giá bán:</span>
+            <span class="info-content"> @Html.DisplayFor(model => model.DonGia)</span>
+
+        </div>
+
+        <div class="info-row">
+            <span class="info-label">Tên hãng sản xuất :</span>
+            <span class="info-content">   @Html.DisplayFor(model => model.HangSanXuat.TenHSX)</span>
+
+        </div>
+        <div class="info-row">
+            <span class="info-label">Tên loại sữa:</span>
+            <span class="info-content"> @Html.DisplayFor(model => model.LoaiSua.TenLoaiSua)</span>
+
+        </div>
+        <div class="info-row">
+            <span class="info-label">Tên nhà cung cấp sữa:</span>
+            <span class="info-content">  @Html.DisplayFor(model => model.NhaCungCap.TenNCC)</span>
+
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color" style="text-align:center">
+        <input type="submit" value="Xoá" class="btn btn-default" /> |
+        @Html.ActionLink("Quay Lại Trang Sản Phẩm Sữa", "Index")
+    </div>
+}
+

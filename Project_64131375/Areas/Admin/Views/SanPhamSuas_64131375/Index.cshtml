@@ -1,0 +1,177 @@
+﻿@model IEnumerable<Project_64131375.Models.SanPhamSua>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin_64131375.cshtml";
+    int i = 0;
+}
+
+
+
+
+
+<!-- Page Header -->
+@using (Html.BeginForm("Index", "SanPhamSuas_64131375", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Quản lý sữa</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active">Quản lý sữa</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a href="@Url.Action("Create", "SanPhamSuas_64131375")" class="btn add-btn"><i class="fa fa-plus"></i> Thêm sản phẩm sữa</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row filter-row justify-content-center ">
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="MaSua" value="@ViewBag.MaSua">
+                <label class="focus-label">Mã sữa</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="TenSua" value="@ViewBag.TenSua">
+                <label class="focus-label">Tên sữa</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="HanSuDung" value="@ViewBag.HanSuDung">
+                <label class="focus-label">Hạn sử dụng</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" name="SoLuong" value="@ViewBag.SoLuong">
+                <label class="focus-label">Số lượng</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group row flex-row form-focus justify-content-start">
+                <label class="col-xl-3 align-self-center">Đơn giá từ</label>
+                <div class="col-xl-9">
+                    <input type="text" class="form-control floating pt-1 pb-1" name="DonGiaMin" value="@ViewBag.DonGiaMin">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group row flex-row form-focus justify-content-start">
+                <label class="col-xl-3 align-self-center">Đến</label>
+                <div class="col-xl-9">
+                    <input type="text" class="form-control floating pt-1 pb-1" name="DonGiaMax" value="@ViewBag.DonGiaMax">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus select-focus">
+                @Html.DropDownList("MaLoaiSua", null, "Tất cả", htmlAttributes: new { @class = "select floating" })
+                <label class="focus-label">Loại sữa</label>
+
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus select-focus">
+                @Html.DropDownList("MaNCC", null, "Tất cả", htmlAttributes: new { @class = "select floating" })
+                <label class="focus-label">Nhà cung cấp</label>
+
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">
+            <div class="form-group form-focus select-focus">
+                @Html.DropDownList("MaHSX", null, "Tất cả", htmlAttributes: new { @class = "select floating" })
+                <label class="focus-label">Hãng sản xuất</label>
+
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-success btn-block" />
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+            <a href="@Url.Action("Index", "SanPhamSuas_64131375/Index")" class="btn btn-info btn-block"> Nhập mới </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive: nowrap">
+                <table class="table table-striped custom-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã sữa</th>
+                            <th>Tên sữa</th>
+                            <th class="underload">Ảnh sữa</th>
+                            <th>Số lượng</th>
+                            <th class="underload">Hạn sử dụng</th>
+                            <th>Đơn giá</th>
+                            <th class="underload">Loại sữa</th>
+                            <th>Nhà cung cấp</th>
+                            <th>Hãng sản xuất</th>
+                            <th class="text-right no-sort underload">Hành động</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @ViewBag.TB
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @{ i++;}
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaSua)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenSua)
+                                </td>
+                                <td>
+                                    <img style="border-radius:14%" src="~/Content/assets/img/SanPhamSua/@item.AnhSua" class="img-fluid border border-light" alt="your image">
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.SoLuong)</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HanSuDung)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DonGia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoaiSua.TenLoaiSua)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NhaCungCap.TenNCC)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HangSanXuat.TenHSX)
+                                </td>
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="@Url.Action("Edit", new { id = item.MaSua })"><i class="fa fa-pencil m-r-5"></i> Chỉnh Sữa Sản Phẩm Sữa</a>
+                                            <a class="dropdown-item" href="@Url.Action("Details", new { id = item.MaSua })"><i class="fa fa-eye m-r-5"></i>Xem Chi Tiết Sản Phẩm Sữa</a>
+                                            <a class="dropdown-item" href="@Url.Action("Delete", new { id = item.MaSua })"><i class="fa fa-trash-o m-r-5"></i> Xoá Sản Phẩm Sữa</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+}
